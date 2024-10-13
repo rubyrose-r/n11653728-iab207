@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<!-- Hero Section -->
+<div class="hero d-flex justify-content-center align-items-center text-center">
+   <div class="overlay p-5">
+      <h1>Find the Best Travel Deals</h1>
+      <p>Explore top destinations with unbeatable offers.</p>
+      <form class="d-flex justify-content-center mt-4" action="{{ url_for('main.search') }}" method="GET">
+         <input type="text" name="search" class="form-control w-50 me-2" placeholder="Search for destinations">
+         <button type="submit" class="btn btn-light">Search</button>
+      </form>
+   </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<!-- Featured Travel Deals -->
+<div class="container mt-5">
+   <div class="row text-center">
+      <div class="col">
+         <h2>Discover Amazing Places</h2>
+         <p>Explore our curated list of top travel deals, from exotic islands to bustling cities.</p>
+      </div>
+   </div>
+   <div class="row">
+      {% for destination in destinations %}
+      <div class="col-md-4 mb-4">
+         <div class="card destination-card shadow-sm">
+            <img src="{{ destination.image }}" class="card-img-top" alt="Image of {{ destination.name }}">
+            <div class="card-body">
+               <h5 class="card-title">{{ destination.name }}</h5>
+               <p class="card-text">{{ destination.description }}</p>
+               <a href="{{ url_for('destination.show', id=destination.id) }}" class="btn btn-custom">Explore</a>
+            </div>
+         </div>
+      </div>
+      {% endfor %}
+   </div>
+</div>
+
+<!-- Testimonials Section -->
+<div class="container my-5">
+   <section class="mt-5 text-center">
+      <blockquote class="blockquote">
+         <p class="mb-5">"TravelNow helped me find the best deals for my dream vacation. Highly recommend!"</p>
+         <footer class="blockquote-footer">A Happy Traveler</footer>
+      </blockquote>
+   </section>
+</div>
+{% endblock %}
